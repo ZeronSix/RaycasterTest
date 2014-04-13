@@ -3,11 +3,13 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "raycaster.h"
+#include "linalg.h"
 
 static const int windowWidth = 960;
 static const int windowHeight = 540;
 static const int contextVersionMajor = 3;
 static const int contextVersionMinor = 3;
+static const float movementSpeed = 5.0f;
 
 static GLFWwindow* window;
 
@@ -67,6 +69,24 @@ void FrameLoop( float deltaTime ) {
 	char buffer[128];
 	sprintf( buffer, "Raycasting @ fps: %.2f", 1.0f / deltaTime );
 	glfwSetWindowTitle( window, buffer );
+
+	// update player pos
+	Vec2 movement = { { 0, 0 } };
+	if ( glfwGetKey( window, GLFW_KEY_A ) == GLFW_PRESS ) {
+		movement.x += movementSpeed * deltaTime;
+	} else if ( glfwGetKey( window, GLFW_KEY_D ) == GLFW_PRESS ) {
+		movement.x -= movementSpeed * deltaTime;
+	}
+
+	if ( glfwGetKey( window, GLFW_KEY_S ) == GLFW_PRESS ) {
+		movement.y += movementSpeed * deltaTime;
+	} else if ( glfwGetKey( window, GLFW_KEY_W ) == GLFW_PRESS ) {
+		movement.y -= movementSpeed * deltaTime;
+	}
+	movement = RotateVec2( movement, -90 * DEG2RAD );
+	cameraPos = AddVec2( cameraPos, movement );
+
+	//cameraRot.x += movementSpeed * deltaTime;
 
 	glClear( GL_COLOR_BUFFER_BIT );
        
