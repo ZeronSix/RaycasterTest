@@ -9,7 +9,7 @@
 
 Vec2 cameraPos = { { 22.0f, 12.0f } };
 Vec2 cameraRot = { { 0.0f, 0.0f } };
-float fieldOfView = 60.0f;
+float fieldOfView = 90.0f;
 
 static const Vec2 startCameraDir = { { -1.0f, 0.0f } };
 static Vec2 cameraDir = { { -1.0f, 0.0f } };

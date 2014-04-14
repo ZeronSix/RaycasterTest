@@ -5,8 +5,8 @@
 #include "raycaster.h"
 #include "linalg.h"
 
-static const int windowWidth = 960;
-static const int windowHeight = 540;
+static const int windowWidth = 1280;
+static const int windowHeight = 720;
 static const int contextVersionMajor = 3;
 static const int contextVersionMinor = 3;
 static const float movementSpeed = 5.0f;
@@ -61,6 +61,8 @@ bool InitGL() {
 		return false;
 	}
 
+	glfwSetInputMode( window, GLFW_CURSOR, GLFW_CURSOR_DISABLED );
+
 	return true;
 }
 
@@ -70,7 +72,11 @@ void FrameLoop( float deltaTime ) {
 	sprintf( buffer, "Raycasting @ fps: %.2f", 1.0f / deltaTime );
 	glfwSetWindowTitle( window, buffer );
 
-	// update player pos
+	// update input
+	if ( glfwGetKey( window, GLFW_KEY_ESCAPE ) == GLFW_PRESS ) {
+		glfwSetWindowShouldClose( window, true );
+	}
+
 	Vec2 movement = { { 0, 0 } };
 	if ( glfwGetKey( window, GLFW_KEY_A ) == GLFW_PRESS ) {
 		movement.x += movementSpeed * deltaTime;
@@ -83,10 +89,15 @@ void FrameLoop( float deltaTime ) {
 	} else if ( glfwGetKey( window, GLFW_KEY_W ) == GLFW_PRESS ) {
 		movement.y -= movementSpeed * deltaTime;
 	}
-	movement = RotateVec2( movement, -90 * DEG2RAD );
+	movement = RotateVec2( movement, ( cameraRot.x - 90 ) * DEG2RAD );
 	cameraPos = AddVec2( cameraPos, movement );
 
-	//cameraRot.x += movementSpeed * deltaTime;
+	static double oldMouseX;
+	double mouseX;
+	glfwGetCursorPos( window, &mouseX, NULL );
+	printf( "%f", mouseX );
+	cameraRot.x -= (float)( mouseX - oldMouseX ) * movementSpeed * deltaTime;
+	oldMouseX = mouseX;
 
 	glClear( GL_COLOR_BUFFER_BIT );
        
