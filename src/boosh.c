@@ -1,10 +1,10 @@
-#include <raycaster_engine/raycaster_engine.h>
+#include <boosh/boosh.h>
 
 #include <stdio.h>
 
 #include <SDL2/SDL.h>
 
-int raycaster_init() {
+int boosh_init() {
     SDL_Init(SDL_INIT_VIDEO);
 
     SDL_Window* window = SDL_CreateWindow("SDL2Test", SDL_WINDOWPOS_UNDEFINED,

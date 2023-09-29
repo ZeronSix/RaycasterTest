@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.16..3.26)
 
 project(
-  RaycasterTest
+  Boosh
   VERSION 0.1
-  DESCRIPTION "Raycaster test"
+  DESCRIPTION "Boosh"
   LANGUAGES C
 )
 

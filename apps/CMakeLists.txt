@@ -1,3 +1,3 @@
-add_executable(raycaster_test raycaster_test.c)
-target_compile_features(raycaster_test PRIVATE c_std_17)
-target_link_libraries(raycaster_test PRIVATE raycaster_engine)
+add_executable(boosh_test boosh_test.c)
+target_compile_features(boosh_test PRIVATE c_std_17)
+target_link_libraries(boosh_test PRIVATE boosh)
