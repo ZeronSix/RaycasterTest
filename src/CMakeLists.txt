@@ -1,8 +1,10 @@
-set(HEADER_LIST "${Boosh_SOURCE_DIR}/include/boosh/boosh.h")
+set(HEADER_LIST ${Boosh_SOURCE_DIR}/include/boosh/boosh.h
+                ${Boosh_SOURCE_DIR}/include/boosh/cgmath.h
+)
 
 find_package(SDL2 REQUIRED)
 
-add_library(boosh boosh.c ${HEADER_LIST})
+add_library(boosh boosh.c cgmath.c ${HEADER_LIST})
 target_include_directories(
   boosh
   PUBLIC ../include

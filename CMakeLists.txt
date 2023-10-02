@@ -13,5 +13,10 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   include(CTest)
 endif()
 
+add_subdirectory(extern)
 add_subdirectory(src)
 add_subdirectory(apps)
+
+if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR BOOSH_CMAKE_BUILD_TESTING) AND BUILD_TESTING)
+  add_subdirectory(test)
+endif()
